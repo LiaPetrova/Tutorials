@@ -1,4 +1,4 @@
-const { createCourse, getById } = require('../services/courseService');
+const { createCourse, getById, deleteById, editCourse } = require('../services/courseService');
 const { parseError } = require('../util/parser');
 
 const courseController = require('express').Router();
@@ -41,6 +41,58 @@ courseController.get('/:id/details', async (req, res) => {
         course,
         isOwner
     });
+});
+
+courseController.get('/:id/edit', async (req, res) => {
+    const course = await getById(req.params.id);
+
+    if (course.owner.toString() != req.user._id.toString()) {
+        return res.redirect('/course/create');
+    }
+    res.render('edit', {
+        title: 'Edit course',
+        course
+    });
+});
+
+courseController.post('/:id/edit', async (req, res) => {
+
+    let course = await getById(req.params.id);
+
+    if (course.owner.toString() != req.user._id.toString()) {
+        return res.redirect('/');
+    }
+    
+    course = {
+        title: req.body.title,
+        description: req.body.description,
+        imageUrl: req.body.imageUrl,
+        duration: req.body.duration
+    };
+
+    try {
+        await editCourse(req.params.id, course);
+        res.redirect(`/course/${req.params.id}/details`);
+
+    } catch(error) {
+        res.render('edit', {
+            title: 'Edit Course',
+            course: req.body,   
+            errors: parseError(error)
+        });
+    }
+});
+
+
+courseController.get('/:id/delete', async (req, res) => {
+    const course = await getById(req.params.id);
+
+    if (course.owner.toString() != req.user._id.toString()) {
+        return res.redirect('/');
+    }
+
+    await deleteById(course._id);
+    res.redirect('/');
 });
 
 
