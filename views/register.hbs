@@ -1,48 +1,19 @@
-<body>
 
-    <div id="container">
-        <div>
-            {{!-- <div class="notification loadingBox">
-                Loading …
-            </div>
-            <div class="notification infoBox">
-                <span>Info</span>
-            </div> --}}
-            <div class="notification errorBox">
-                {{#if errors}}
-                {{#each errors}}
-                <span>{{this}}</span>
-                {{/each}}
-                {{/if}}
-                {{!-- <span>Error</span> --}}
-            </div>
-        </div>
-        <nav>
-            <div class="left-container">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/auth/login">Login</a></li>
-                    <li><a href="/auth/register">Register</a></li>
-                </ul>
-            </div>
-        </nav>
+            <form class="text-center border border-light p-5" action="/auth/register" method="POST">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" placeholder="Username" name="username" value="{{body.username}}">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password" value="">
+                </div>
 
-        <section id="viewRegister">
-            <h2>Create your account:</h2>
-            <form id="formRegister" action="/auth/register" method="POST">
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email" placeholder="Email" value="{{body.username}}">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your Username" value="{{body.username}}">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Password">
-                <label for="rePassword">Repeat Password:</label>
-                <input type="password" id="rePassword" name="rePassword" placeholder="Repeat Password">
-                <input type="submit" class="register" value="Register">
+                <div class="form-group">
+                    <label for="rePassword">Repeat Password</label>
+                    <input type="password" class="form-control" placeholder="Repeat-Password" name="rePassword"
+                        value="">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register</button>
             </form>
-        </section>
-
-        <footer>@SoftUni - JS Back-end - BookingUni 2020</footer>
-    </div>
-
-</body>

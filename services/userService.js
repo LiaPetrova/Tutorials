@@ -14,12 +14,9 @@
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
-        email,
         username,
         hashedPassword
     });
-
-    //TODO See if register creates an user session
 
     const token = createSession(user);
     return token;
@@ -40,10 +37,6 @@
     }
 
     return createSession(user);
- }
-
- async function logout() {
-
  }
 
  function createSession({ _id, username }) {
