@@ -7,9 +7,10 @@ const homeController = require('express').Router();
 homeController.get('/', async (req, res) => {
     let view;
     let courses = [];
+    const search = req.query.search;
 
     if (req.user) {
-        courses = await getAllByDate();
+        courses = await getAllByDate(search);
         view = 'user-home'      
 
     } else {
@@ -19,6 +20,7 @@ homeController.get('/', async (req, res) => {
 
     res.render(view, {
         title: 'Home',
+        search,
         courses
     });
 });
