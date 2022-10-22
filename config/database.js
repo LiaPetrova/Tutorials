@@ -11,7 +11,7 @@ module.exports = async (app) => {
         });
         console.log('Database Connected');
 
-    } catch(err) {
+    } catch (err) {
         console.error(err.message);
         process.exit(1);
     }
