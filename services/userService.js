@@ -4,7 +4,7 @@
 
  const JWT_SECRET = 'fhkj345j34kjfoi3409t';
  
- async function register (email, username, password) {
+ async function register ( username, password) {
 
     const existing = await User.findOne({ username }).collation({ locale: 'en', strength: 2});
     if (existing) {
