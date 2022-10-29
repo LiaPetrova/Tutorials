@@ -46,7 +46,7 @@ async (req, res) => {
     }
 });
 
-authController.get('/login',isGuest(), (req, res) => {
+authController.get('/login', isGuest(), (req, res) => {
     res.render('login', {
         title: 'Login Page'
     });

@@ -1,6 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 
-const URL_PATTERN = /https?:\/\/./i;
+const URL_PATTERN = /[\w]/i;
 
 const courseSchema = new Schema ({
     title: { type: String, unique: true, minLength: [4, 'Course title must be at least 4 characters long']},

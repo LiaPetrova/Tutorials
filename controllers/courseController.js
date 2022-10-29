@@ -78,6 +78,7 @@ courseController.post('/:id/edit', preload(), isOwner(), async (req, res) => {
         res.redirect(`/course/${req.params.id}/details`);
 
     } catch(error) {
+        req.body._id = course._id;
         res.render('edit', {
             title: 'Edit Course',
             course: req.body,   
